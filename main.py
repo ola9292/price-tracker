@@ -7,9 +7,9 @@ from email.mime.multipart import MIMEMultipart
 from dotenv import load_dotenv
 
 load_dotenv()
-my_email = os.getenv('EMAIL_ADDRESS')
-password = os.getenv('EMAIL_PASSWORD')
-smtp_address = os.getenv('SMTP_ADDRESS')
+my_email = os.getenv('EMAIL_ADDRESS') or os.environ.get('EMAIL_ADDRESS')
+password = os.getenv('EMAIL_PASSWORD') or os.environ.get('EMAIL_PASSWORD')
+smtp_address = os.getenv('SMTP_ADDRESS') or os.environ.get('SMTP_ADDRESS')
 # print(my_email)
 import requests
 target_price = 100
