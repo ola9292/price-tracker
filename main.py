@@ -5,6 +5,8 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from dotenv import load_dotenv
+from fake_useragent import UserAgent
+ua = UserAgent()
 
 load_dotenv()
 my_email = os.getenv('EMAIL_ADDRESS') or os.environ.get('EMAIL_ADDRESS')
@@ -28,13 +30,18 @@ header = {
     "Sec-Fetch-User": "?1",
     "Sec-Gpc": "1",
     "Upgrade-Insecure-Requests": "1",
-    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:126.0) Gecko/20100101 Firefox/126.0",
+    "User-Agent": ua.random,
+    #"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:126.0) Gecko/20100101 Firefox/126.0",
 }
 
 response = requests.get(url=URL, headers=header)
 response.raise_for_status()
 
 amazon_webpage = response.text
+print(f"Page length: {len(amazon_webpage)}")  # Log HTML size
+if "captcha" in amazon_webpage.lower():
+    print("CAPTCHA detected")
+    exit(1)
 soup = BeautifulSoup(amazon_webpage, 'html.parser')
 
 # price_whole = soup.find(name="span", class_="aok-offscreen").getText()
