@@ -39,8 +39,6 @@ soup = BeautifulSoup(amazon_webpage, 'html.parser')
 
 # price_whole = soup.find(name="span", class_="aok-offscreen").getText()
 # print(price_whole.split('$')[1])
-# price_float = float(price_whole.split('$')[1])
-# print(price_float)
 product_title = soup.find(name="span", class_="product-title-word-break").getText()
 # print(product_title)
 
