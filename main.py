@@ -5,8 +5,7 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from dotenv import load_dotenv
-from fake_useragent import UserAgent
-ua = UserAgent()
+
 
 load_dotenv()
 my_email = os.getenv('EMAIL_ADDRESS') or os.environ.get('EMAIL_ADDRESS')
@@ -42,7 +41,7 @@ soup = BeautifulSoup(amazon_webpage, 'html.parser')
 # price_whole = soup.find(name="span", class_="aok-offscreen").getText()
 # print(price_whole.split('$')[1])
 product_title = soup.find(name="span", class_="product-title-word-break").getText()
-# print(product_title)
+#print(product_title)
 
 whole_price = soup.find(name="span", class_="a-price-whole").getText()
 fraction_price = soup.find(name="span", class_="a-price-fraction").getText()
